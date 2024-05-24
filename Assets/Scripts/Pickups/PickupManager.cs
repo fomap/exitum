@@ -18,7 +18,9 @@ public class PickupManager : MonoBehaviour
         star,
         carrot
     }
-    
+
+    /*Because during development phase if was uncomfotable to use joystick on a screen with mouse, 
+    seperate controller that uses keyboards was created, hence or statement in 37th line*/
    
     void Start()
     {
@@ -36,10 +38,7 @@ public class PickupManager : MonoBehaviour
         if(col == player.GetComponent<CapsuleCollider2D>() || col == player2.GetComponent<CapsuleCollider2D>() )
         {
 
-        //     if(col == player2.GetComponent<CapsuleCollider2D>() )
-        // {
             soundEffect.Play();
-            // Debug.Log("Hello");
             if(item == Type.star)
             {
                 
@@ -50,6 +49,8 @@ public class PickupManager : MonoBehaviour
             {
                 player2._canDoubleJump = true;
                 player._canDoubleJump = true;
+                player._maxNumberOfJumps+=1;
+                player2._maxNumberOfJumps+=1;
 
             }
 
@@ -57,11 +58,6 @@ public class PickupManager : MonoBehaviour
             spriteOfObject.enabled = false;
             colliderOfObject.enabled = false;
             
-             
-        //    Debug.Log(player._doubleJump);
-           //player2.collectedStars++;
-        //    Debug.Log( player.collectedStars++);
-
         }
     }
 

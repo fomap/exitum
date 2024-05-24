@@ -32,77 +32,35 @@ public class MovementManagerBunny : MonoBehaviour //, ITeleport
     public int collectedStars;
 
     private float jumpingPower = 8f;
-    // public AudioSource _walkSound;
  
-
     [SerializeField] private Camera _camera; 
     [SerializeField] private float _dampingSpeed;
-    // public int sceneID;
 
-
-    // public float[,] initPoints =
-    // {
-    //     {-6, -4},
-    //     {-8, -8.5f},
-
-    // };
-    
-
-    // private void Awake()
-    
-    // {
-        
-    //     sceneID = SceneManager.GetActiveScene().buildIndex - 1;
-    //     transform.position = new Vector2(initPoints[sceneID, 0], initPoints[sceneID, 1]);
-    // }
 
     private void Start() {
-    //    _camera= GameObject.FindObjectOfType<Camera>();
         _canDoubleJump = false;
-         collectedStars = 0;
-        // _walkSound = GetComponent<AudioSource>();
-        // _camera = Camera.main;
-        // _camera.enabled = true; 
+        collectedStars = 0;
+        _maxNumberOfJumps = 1;
     }
     private void Update()
     {
-
-
-        // horizontal = Input.GetAxis("Horizontal");
-
-
-        // if(Input.GetKey(KeyCode.Space))
-        // {
-        //     Jump();   
-        // }
-
-     
-
-
-
 
         _joystickInput = _fixedJoystick.Direction;
     
         var vel = _joystickInput.magnitude;
 
-        if (vel == 0 )//|| horizontal == 0)
+        if (vel == 0 )
         {
             _animator.SetBool("isRunning", false);
-            // _walkSound.Stop();
+           
         }
-        // else if (horizontal != 0 || vel != 0 )
         else
         {
             _animator.SetBool("isRunning", true);
-        //    if(!_walkSound.isPlaying)
-        //    {
-        //     _walkSound.Play();
-
-        //    }
-            //_walkSound.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+   
         }
 
-        if(_joystickInput.x < 0) // || horizontal < 0f)
+        if(_joystickInput.x < 0) 
         {   
             transform.localScale = new Vector2(-1f, 1f);
         }
@@ -126,9 +84,6 @@ public class MovementManagerBunny : MonoBehaviour //, ITeleport
     {
         var targetPos = (Vector2)player.position + new Vector2(_joystickInput.x, 0) * (Time.deltaTime * _moveSpeed);
         player.transform.position = targetPos;
-
-        // _rb.velocity = new Vector2(horizontal * speed, _rb.velocity.y);
-
         _camera.transform.position = Vector3.Lerp(new Vector3(_camera.transform.position.x,  _camera.transform.position.y,  -10), transform.position, Time.deltaTime * _dampingSpeed);
 
 
@@ -147,23 +102,6 @@ public class MovementManagerBunny : MonoBehaviour //, ITeleport
 
     public void Jump()
     {
-        // Debug.Log("hewwo");
-        // if(_rb.velocity.y > 0f)
-        // {
-        //      _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * 0.5f);
-        // }
-        // else
-        // {
-
-        // if(isGrounded() || _doubleJump)
-        // {
-        //     _rb.velocity = new Vector2(_rb.velocity.x, jumpingPower);
-        //     _animator.SetBool("isJumping", true);
-
-        //     _doubleJump = !_doubleJump;
-
-        // }
-        // }
         
         if(_joystickInput != Vector2.zero)
         {
@@ -190,15 +128,6 @@ public class MovementManagerBunny : MonoBehaviour //, ITeleport
         _numOfJumps = 0;
         jumpingPower = 8f;
     }
-    // private void OnTriggerEnter2D(Collider2D other) {
-        
-    //     if(other.gameObject.tag == "Pickup")
-    //     {
-    //         starCollected = true;
-    //         Debug.Log("collected");
-    //     }
-     
-
-    // }
+    
 
 }

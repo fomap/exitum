@@ -14,32 +14,15 @@ public class Condition : MonoBehaviour
     void Start()
     {   
         loadManager.GetComponent<LoadManager>().enabled = false;
-        // player = GameManager.Instance.player;
-         player2 = GameObject.FindObjectOfType<MovementManagerBunny>();
-         player = GameObject.FindObjectOfType<BunnyController>();
+        player2 = GameObject.FindObjectOfType<MovementManagerBunny>();
+        player = GameObject.FindObjectOfType<BunnyController>();
     }
 
     void Update()
     {
-        
-           if(player.collectedStars == starsToPass || player2.collectedStars == starsToPass )
-           {
-
-        //        if(player2.collectedStars == starsToPass)
-        //    {
-            //    Debug.Log(GameManager.Instance.player.collectedStars);
-
-                loadManager.GetComponent<LoadManager>().enabled = true;
-               // Debug.Log(loadManager.GetComponent<LoadManager>().enabled);
-           }
-
-        
+        if(player.collectedStars == starsToPass || player2.collectedStars == starsToPass )
+        {
+            loadManager.GetComponent<LoadManager>().enabled = true;
+        }
     }
-    
-
-
-    // private void OnTriggerEnter2D(Collider2D col)
-    // {
-       
-    // }
 }

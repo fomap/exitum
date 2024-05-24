@@ -22,13 +22,13 @@ public class LevelManager : MonoBehaviour
             {
                 levelButtons[i].GetComponent<Image>().sprite = Lock.sprite;
                 levelButtons[i].interactable = false;
-                // levelButtons[i].GetComponentInChildren<Text>().text = "";
+                
             }
             else
             {
                 levelButtons[i].GetComponent<Image>().sprite = Done.sprite;
                 levelButtons[i].interactable = true;
-                // levelButtons[i].GetComponentInChildren<Text>().text = "" + levelNum;
+                
 
             }
         }
@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     public void LoadLevel(int levelNum)
     {
-        // Debug.Log("Hello");
+        
         SceneManager.LoadScene("lvl" + levelNum);
     }
 }
