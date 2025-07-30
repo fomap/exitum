@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class Teleport : MonoBehaviour
 {
-    
-    private BunnyController player;
-    private MovementManagerBunny player2;
+    private PlayerMovement player;
     public AudioSource tpSound;
    
     public List<Transform> teleportLocations = new List<Transform>();
     private int starsInPlayer;
     private void Start()
     {
-        player = GameObject.FindObjectOfType<BunnyController>();
-        player2 = GameObject.FindObjectOfType<MovementManagerBunny>();
+        player = GameObject.FindObjectOfType<PlayerMovement>();    
         tpSound = GetComponent<AudioSource>();
 
     }
     private void OnTriggerEnter2D(Collider2D col)
     {   
-        if(col == player.GetComponent<CapsuleCollider2D>() || col == player2.GetComponent<CapsuleCollider2D>() )
+        if( col == player.GetComponent<CapsuleCollider2D>())
         {
-            starsInPlayer = player.collectedStars;
+            starsInPlayer = player.getCollectedStars();
             tpSound.Play();   
                  
             if(teleportLocations.Count == 1)

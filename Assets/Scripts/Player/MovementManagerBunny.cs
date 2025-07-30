@@ -8,10 +8,6 @@ using UnityEngine.UI;
 
 public class MovementManagerBunny : MonoBehaviour //, ITeleport 
 {
-
-
-
-
     public  FixedJoystick _fixedJoystick;
    
     public Transform player;

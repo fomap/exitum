@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: d245db779a432cf4c9915032bdae2b3e
   - enabled: 1
     path: Assets/Scenes/lvl1.unity
-    guid: 0b49613c9132dbd48ac3ab626db48e4a
+    guid: 729217e1efd06ef4594d0e719183365d
   - enabled: 1
     path: Assets/Scenes/lvl2.unity
     guid: dc0b4d691a4de484bbc384928ce8dbf6
@@ -41,4 +41,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/lvl11.unity
     guid: 4919a1cd8fe4c94478ce62bd89365d86
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: dd6f05420a81fe84e8edd633ad394c91, type: 2}
