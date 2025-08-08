@@ -2,37 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     PlayerControls controls;
     float direction;
     bool isFacingRight = true;
 
 
+    [Header("Jumping")]
     [SerializeField] private int currectNumberOfJumps = 0;
-
-    [SerializeField] private int maxJumps = 1; 
+    [SerializeField] private int maxJumps = 1;
     private int availableJumps;
-
-    [SerializeField] private float jumpVelocity = 5; 
+    [SerializeField] private float jumpVelocity = 6;
     [SerializeField] private bool isGrounded;
     [SerializeField] private Transform groundcheck;
     [SerializeField] private LayerMask groundLayer;
 
-    [SerializeField] private Camera camera;
+    [Header("Camera follow")]
+    [SerializeField] Camera camera;
     [SerializeField] private float dampingSpeed;
-    [SerializeField] private float speed = 150;    
+    [SerializeField] private float speed = 150;
+
+
     [SerializeField] private Rigidbody2D playerRB;
     [SerializeField] Animator animator;
-
-
     [SerializeField] private int collectedStars;
+
     private void Awake()
     {
+
+        // DontDestroyOnLoad(gameObject);
+       
+        camera = Camera.main;
+        
+        collectedStars = 0;
         controls = new PlayerControls();
         controls.Enable();
+
 
         controls.Forest.Move.performed += ctx =>
         {
@@ -62,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
             currectNumberOfJumps = 0;
         }
 
-    
+
         playerRB.velocity = new Vector2(direction * speed * Time.fixedDeltaTime, playerRB.velocity.y);
         animator.SetFloat("speed", Mathf.Abs(direction));
 
@@ -71,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
             FlipPlater();
         }
 
-        camera.transform.position = Vector3.Lerp(new Vector3(camera.transform.position.x,  camera.transform.position.y,  -10), transform.position, Time.deltaTime * dampingSpeed);
+        camera.transform.position = Vector3.Lerp(new Vector3(camera.transform.position.x, camera.transform.position.y, -10), transform.position, Time.deltaTime * dampingSpeed);
     }
 
     void FlipPlater()
@@ -104,8 +112,42 @@ public class PlayerMovement : MonoBehaviour
         availableJumps = maxJumps;
     }
 
+    public void CollectedStar()
+    {
+        collectedStars++;
+    }
+
     public int getCollectedStars()
     {
         return collectedStars;
     }
+
+
+
+
+    // private void OnEnable()
+    // {
+    //     SceneManager.sceneLoaded += OnSceneLoaded;
+    // }
+
+    // private void OnDisable()
+    // {
+    //     SceneManager.sceneLoaded -= OnSceneLoaded;
+    // }
+
+    // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    // {
+    //     camera = Camera.main;
+    //     transform.position = Vector3.zero;
+    //     //  groundcheck = transform.Find("GroundCheck");
+    // }
+ 
+    private void OnDestroy()
+    {
+    if (controls != null)
+    {
+        controls.Disable();
+        controls.Dispose();
+    }
+    }   
 }

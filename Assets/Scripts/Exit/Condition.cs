@@ -5,22 +5,18 @@ using UnityEngine;
 public class Condition : MonoBehaviour
 {
    
-    public LoadManager loadManager;
-    
-    public int starsToPass; 
-  
-    private BunnyController player;
-    private MovementManagerBunny player2;
+    [SerializeField] private LoadManager loadManager;
+    [SerializeField] private int starsToPass; 
+    private PlayerMovement player;
     void Start()
     {   
         loadManager.GetComponent<LoadManager>().enabled = false;
-        player2 = GameObject.FindObjectOfType<MovementManagerBunny>();
-        player = GameObject.FindObjectOfType<BunnyController>();
+        player = GameObject.FindObjectOfType<PlayerMovement>();
     }
 
     void Update()
     {
-        if(player.collectedStars == starsToPass || player2.collectedStars == starsToPass )
+        if(player.getCollectedStars() == starsToPass)
         {
             loadManager.GetComponent<LoadManager>().enabled = true;
         }
